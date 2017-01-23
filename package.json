@@ -38,7 +38,7 @@
     "ts-loader": "^2.0.0",
     "tslint-config-holy-grail": "^5.0.1",
     "typescript": "^2.0.7",
-    "webpack": "^2.1.0-beta.25"
+    "webpack": "^2.2.0"
   },
   "files": [
     "build/es5/",
