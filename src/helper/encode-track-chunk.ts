@@ -1,7 +1,7 @@
+import { encode as encodeMessage } from 'json-midi-message-encoder';
 import { createArrayBufferWithDataView } from './create-array-buffer-with-data-view';
 import { joinArrayBuffers } from './join-array-buffers';
 import { writeVariableLengthQuantity } from './write-variable-length-quantity';
-import { encode as encodeMessage } from 'json-midi-message-encoder';
 
 export const encode = (track) => {
     const { arrayBuffer, dataView } = createArrayBufferWithDataView(8);
