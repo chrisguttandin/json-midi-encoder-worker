@@ -1,8 +1,9 @@
+import { IMidiFile } from 'midi-json-parser-worker';
 import { encode as encodeHeaderChunk } from './helper/encode-header-chunk';
 import { encode as encodeTrackChunk } from './helper/encode-track-chunk';
 import { joinArrayBuffers } from './helper/join-array-buffers';
 
-export const encode = ({ division, format, tracks }) => {
+export const encode = ({ division, format, tracks }: IMidiFile) => {
     const arrayBuffers = [];
 
     try {

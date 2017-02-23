@@ -4,7 +4,8 @@
     "url": "https://github.com/chrisguttandin/json-midi-encoder-worker/issues"
   },
   "dependencies": {
-    "json-midi-message-encoder": "0.0.3"
+    "json-midi-message-encoder": "0.0.3",
+    "midi-json-parser-worker": "0.0.8"
   },
   "description": "The worker which is used by the json-midi-encoder package.",
   "devDependencies": {

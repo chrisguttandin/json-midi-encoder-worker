@@ -1,9 +1,10 @@
 import { encode as encodeMessage } from 'json-midi-message-encoder';
+import { IMidiEvent } from 'midi-json-parser-worker';
 import { createArrayBufferWithDataView } from './create-array-buffer-with-data-view';
 import { joinArrayBuffers } from './join-array-buffers';
 import { writeVariableLengthQuantity } from './write-variable-length-quantity';
 
-export const encode = (track) => {
+export const encode = (track: IMidiEvent[]) => {
     const { arrayBuffer, dataView } = createArrayBufferWithDataView(8);
 
     const arrayBuffers = [ arrayBuffer ];

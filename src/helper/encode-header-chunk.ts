@@ -1,6 +1,7 @@
+import { IMidiEvent } from 'midi-json-parser-worker';
 import { createArrayBufferWithDataView } from './create-array-buffer-with-data-view';
 
-export const encode = (division, format, tracks) => {
+export const encode = (division: number, format: number, tracks: IMidiEvent[][]) => {
     const { arrayBuffer, dataView } = createArrayBufferWithDataView(14);
 
     // Write MThd as number.
