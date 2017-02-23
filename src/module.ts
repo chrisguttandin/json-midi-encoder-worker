@@ -1,13 +1,13 @@
 import { encode } from './midi-file-encoder';
 
-self.addEventListener('message', ({ data: { json } }) => {
+addEventListener('message', ({ data: { json } }) => {
 
     try {
-        self.postMessage({
+        postMessage({
             midiFile: encode(json)
         });
     } catch (err) {
-        self.postMessage({
+        postMessage({
             err: {
                 message: err.message
             }
