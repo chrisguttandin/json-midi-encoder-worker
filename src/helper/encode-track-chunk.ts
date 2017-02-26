@@ -14,7 +14,7 @@ export const encode = (track: IMidiEvent[]) => {
     // Write MTrk as number.
     dataView.setUint32(0, 1297379947);
 
-    for (let message of track) {
+    for (const message of track) {
         const deltaArrayBuffer = writeVariableLengthQuantity(message.delta);
 
         try {
@@ -25,7 +25,7 @@ export const encode = (track: IMidiEvent[]) => {
             arrayBuffers.push(deltaArrayBuffer, messageArrayBuffer);
         } catch (err) {
             if (err.message.match(/Unencodable\smessage\swith\sa\sdelta\sof\s[0-9]+\./)) {
-                let index = track.indexOf(message);
+                const index = track.indexOf(message);
 
                 throw new Error(`Unencodable message at index ${ index }.`);
             }
