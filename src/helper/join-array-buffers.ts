@@ -1,6 +1,8 @@
 export const joinArrayBuffers = (arrayBuffers: ArrayBuffer[]) => {
     const byteLength = arrayBuffers.reduce((bytLngth, arrayBuffer) => bytLngth + arrayBuffer.byteLength, 0);
 
+    // @todo Remove this tslint rule again when possible.
+    // tslint:disable-next-line:no-use-before-declare
     const { uint8Array } = arrayBuffers.reduce(({ offset, uint8Array: nt8Rry }, arrayBuffer) => {
         nt8Rry.set(new Uint8Array(arrayBuffer), offset);
 
