@@ -47,9 +47,9 @@
     "src/"
   ],
   "homepage": "https://github.com/chrisguttandin/json-midi-encoder-worker",
-  "jsnext:main": "build/es2015/module.js",
   "license": "MIT",
   "main": "build/es5/bundle.js",
+  "module": "build/es2015/module.js",
   "name": "json-midi-encoder-worker",
   "repository": {
     "type": "git",
