@@ -22,7 +22,7 @@ export const loadFixtureAsArrayBuffer = (fixture, callback) => {
             callback(null, event.target.response);
         }
     };
-    request.open('GET', 'base/test/fixtures/' + fixture);
+    request.open('GET', '/base/test/fixtures/' + fixture);
 
     if (fixture.slice(-4) !== '.txt') {
         request.responseType = 'arraybuffer';
@@ -44,6 +44,6 @@ export const loadFixtureAsJson = (fixture, callback) => {
             callback('request-failed');
         }
     };
-    request.open('GET', 'base/test/fixtures/' + fixture);
+    request.open('GET', '/base/test/fixtures/' + fixture);
     request.send();
 };
