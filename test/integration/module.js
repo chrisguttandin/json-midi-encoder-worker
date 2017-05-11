@@ -9,9 +9,12 @@ describe('module', () => {
         'scale': [ 'scale.mid', 'scale.json' ]
     }, (midiFilename, jsonFilename) => {
 
+        let id;
         let worker;
 
         beforeEach(() => {
+            id = 89;
+
             worker = new Worker('base/src/module.ts');
         });
 
@@ -24,13 +27,21 @@ describe('module', () => {
                 loadFixtureAsArrayBuffer(midiFilename, (err, arrayBuffer) => {
                     expect(err).to.be.null;
 
-                    worker.addEventListener('message', ({ data: { midiFile } }) => {
-                        expect(new Uint8Array(midiFile)).to.deep.equal(new Uint8Array(arrayBuffer));
+                    worker.addEventListener('message', ({ data }) => {
+                        expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
+
+                        expect(data).to.deep.equal({
+                            error: null,
+                            id,
+                            result: {
+                                arrayBuffer: data.result.arrayBuffer
+                            }
+                        });
 
                         done();
                     });
 
-                    worker.postMessage({ json });
+                    worker.postMessage({ id, method: 'encode', params: { midiFile: json } });
                 });
             });
         });
@@ -41,13 +52,19 @@ describe('module', () => {
             loadFixtureAsArrayBuffer(midiFilename, (err, arrayBuffer) => {
                 expect(err).to.be.null;
 
-                worker.addEventListener('message', ({ data: { err } }) => {
-                    expect(err.message).to.equal('The given JSON object seems to be invalid.');
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: {
+                            message: 'The given JSON object seems to be invalid.'
+                        },
+                        id,
+                        result: null
+                    });
 
                     done();
                 });
 
-                worker.postMessage({ json: arrayBuffer });
+                worker.postMessage({ id, method: 'encode', params: { midiFile: arrayBuffer } });
             });
         });
 
