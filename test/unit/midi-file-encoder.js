@@ -3,6 +3,11 @@ import { loadFixtureAsArrayBuffer, loadFixtureAsJson } from '../helper/load-fixt
 
 describe('midiFileEncoder', () => {
 
+    afterEach((done) => {
+        // @todo This is a optimistic fix to prevent the famous 'Some of your tests did a full page reload!' error.
+        setTimeout(done, 1000);
+    });
+
     describe('encode()', () => {
 
         leche.withData({
