@@ -5,8 +5,7 @@
   },
   "dependencies": {
     "json-midi-message-encoder": "^1.0.4",
-    "midi-json-parser-worker": "^2.1.1",
-    "tslint": "^5.7.0"
+    "midi-json-parser-worker": "^2.1.1"
   },
   "description": "The worker which is used by the json-midi-encoder package.",
   "devDependencies": {
@@ -43,6 +42,7 @@
     "sinon-chai": "^2.13.0",
     "ts-loader": "^2.3.4",
     "tsconfig-holy-grail": "^2.2.23",
+    "tslint": "^5.7.0",
     "tslint-config-holy-grail": "^11.0.0",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5"
