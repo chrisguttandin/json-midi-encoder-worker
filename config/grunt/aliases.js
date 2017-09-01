@@ -4,8 +4,7 @@ module.exports = {
         'sh:build-es2015',
         'sh:build-es5',
         'sh:build-esm',
-        'sh:build-worker',
-        'uglify'
+        'webpack'
     ],
     continuous: [
         // @todo This is broken now.

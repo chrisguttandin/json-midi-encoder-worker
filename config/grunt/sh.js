@@ -8,9 +8,6 @@ module.exports = {
     'build-esm': {
         cmd: 'tsc -p src/tsconfig.json --declaration false --target es5 --outDir build/esm'
     },
-    'build-worker': {
-        cmd: 'rollup -c config/rollup/worker.js'
-    },
     'lint': {
         cmd: 'tslint -c config/tslint/src.json --project src/tsconfig.json --type-check src/**/*.ts'
     }
