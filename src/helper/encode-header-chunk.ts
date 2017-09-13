@@ -1,5 +1,5 @@
 import { TMidiEvent } from 'midi-json-parser-worker';
-import { createArrayBufferWithDataView } from './create-array-buffer-with-data-view';
+import { createArrayBufferWithDataView } from './create-array-buffer-with-data-view';
 
 export const encode = (division: number, format: number, tracks: TMidiEvent[][]) => {
     const { arrayBuffer, dataView } = createArrayBufferWithDataView(14);
