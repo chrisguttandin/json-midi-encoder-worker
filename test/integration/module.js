@@ -3,6 +3,8 @@ import { loadFixtureAsArrayBuffer, loadFixtureAsJson } from '../helper/load-fixt
 describe('module', () => {
 
     leche.withData({
+        'MIDIOkFormat1-lyrics': [ 'MIDIOkFormat1-lyrics.mid', 'MIDIOkFormat1-lyrics.json' ],
+        'MIDIOkFormat2': [ 'MIDIOkFormat2.mid', 'MIDIOkFormat2.json' ],
         'SubTractor 1': [ 'SubTractor 1.mid.txt', 'SubTractor 1.json' ],
         'SubTractor 2': [ 'SubTractor 2.mid', 'SubTractor 2.json' ],
         'because': [ 'because.mid', 'because.json' ],
