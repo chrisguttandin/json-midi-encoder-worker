@@ -12,12 +12,12 @@ export const encode = ({ division, format, tracks }: IMidiFile) => {
         throw new Error('The given JSON object seems to be invalid.');
     }
 
-    for (let track of tracks) {
+    for (const track of tracks) {
         try {
             arrayBuffers.push(encodeTrackChunk(track));
         } catch (err) {
             if (err.message.match(/Unencodable\sevent\sat\sposition\s[0-9]+\./)) {
-                let index = tracks.indexOf(track);
+                const index = tracks.indexOf(track);
 
                 throw new Error(`${ err.message.slice(0, -1) } of the track at index ${ index }.`);
             }
