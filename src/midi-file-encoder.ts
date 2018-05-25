@@ -22,7 +22,7 @@ export const encode = ({ division, format, tracks }: IMidiFile) => {
                 throw new Error(`${ err.message.slice(0, -1) } of the track at index ${ index }.`);
             }
 
-            throw err;
+            throw err; // tslint:disable-line:rxjs-throw-error
         }
     }
 
