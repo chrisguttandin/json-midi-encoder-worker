@@ -26,8 +26,8 @@ describe('module', () => {
             loadFixtureAsJson(jsonFilename, (err, json) => {
                 expect(err).to.be.null;
 
-                loadFixtureAsArrayBuffer(midiFilename, (err, arrayBuffer) => {
-                    expect(err).to.be.null;
+                loadFixtureAsArrayBuffer(midiFilename, (rr, arrayBuffer) => {
+                    expect(rr).to.be.null;
 
                     worker.addEventListener('message', ({ data }) => {
                         expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));

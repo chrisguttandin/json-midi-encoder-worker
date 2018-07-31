@@ -25,8 +25,8 @@ describe('midiFileEncoder', () => {
                 loadFixtureAsArrayBuffer(midiFilename, (err, arrayBuffer) => {
                     expect(err).to.be.null;
 
-                    loadFixtureAsJson(jsonFilename, (err, json) => {
-                        expect(err).to.be.null;
+                    loadFixtureAsJson(jsonFilename, (rr, json) => {
+                        expect(rr).to.be.null;
 
                         expect(new Uint8Array(midiFileEncoder.encode(json))).to.deep.equal(new Uint8Array(arrayBuffer));
 
