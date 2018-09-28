@@ -15,7 +15,7 @@ addEventListener('message', ({ data }: IBrokerEvent) => {
                error: null,
                id,
                result: { arrayBuffer }
-           }, [ arrayBuffer ]);
+           }, [ <ArrayBuffer> arrayBuffer ]);
        } else {
            throw new Error(`The given method "${ (<any> data).method }" is not supported`);
        }
