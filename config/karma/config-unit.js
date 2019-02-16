@@ -91,6 +91,8 @@ module.exports = (config) => {
 
         config.set({
 
+            browserDisconnectTimeout: 20000,
+
             browsers: [
                 'ChromeSauceLabs',
                 'FirefoxSauceLabs'
