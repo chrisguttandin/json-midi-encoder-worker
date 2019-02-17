@@ -24,7 +24,7 @@ describe('module', () => {
         });
 
         it('should parse the midi file', function (done) {
-            this.timeout(6000);
+            this.timeout(10000);
 
             loadFixtureAsJson(filename + '.json', (err, json) => {
                 expect(err).to.be.null;
@@ -52,7 +52,7 @@ describe('module', () => {
         });
 
         it('should refuse to encode a none json object', function (done) {
-            this.timeout(6000);
+            this.timeout(10000);
 
             loadFixtureAsArrayBuffer(filename + '.mid', (err, arrayBuffer) => {
                 expect(err).to.be.null;
