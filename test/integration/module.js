@@ -3,6 +3,7 @@ import { loadFixtureAsArrayBuffer, loadFixtureAsJson } from '../helper/load-fixt
 describe('module', () => {
 
     leche.withData([
+        [ 'A_F_NO7_01' ],
         [ 'because' ],
         [ 'MIDIOkFormat1-lyrics' ],
         [ 'MIDIOkFormat2' ],
