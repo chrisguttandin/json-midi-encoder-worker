@@ -20,6 +20,7 @@ describe('midiFileEncoder', () => {
             [ 'scale' ],
             [ 'SubTractor 1' ],
             [ 'SubTractor 2' ],
+            [ 'test' ],
             [ 'test8bars' ]
         ], (filename) => {
 
