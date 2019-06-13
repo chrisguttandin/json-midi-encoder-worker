@@ -11,7 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "json-midi-message-encoder": "^2.4.9",
-    "midi-json-parser-worker": "^6.3.7",
+    "midi-json-parser-worker": "^6.3.8",
     "tslib": "^1.10.0"
   },
   "description": "The worker which is used by the json-midi-encoder package.",
