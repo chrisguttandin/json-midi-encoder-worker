@@ -27,34 +27,44 @@ describe('midiFileEncoder', () => {
             [ 'test8bars' ]
         ], (filename) => {
 
-            it('should encode the json object', function (done) {
-                this.timeout(10000);
+            describe('with a json object', () => {
 
-                loadFixtureAsArrayBuffer(filename + '.mid', (err, arrayBuffer) => {
-                    expect(err).to.be.null;
+                let arrayBuffer;
+                let json;
 
-                    loadFixtureAsJson(filename + '.json', (rr, json) => {
-                        expect(rr).to.be.null;
+                beforeEach(async function () {
+                    this.timeout(6000);
 
-                        expect(new Uint8Array(midiFileEncoder.encode(json))).to.deep.equal(new Uint8Array(arrayBuffer));
-
-                        done();
-                    });
+                    arrayBuffer = await loadFixtureAsArrayBuffer(`${ filename }.mid`);
+                    json = await loadFixtureAsJson(`${ filename }.json`);
                 });
+
+                it('should encode the json object', function () {
+                    this.timeout(10000);
+
+                    expect(new Uint8Array(midiFileEncoder.encode(json))).to.deep.equal(new Uint8Array(arrayBuffer));
+                });
+
             });
 
-            it('should refuse to encode a none json object', function (done) {
-                this.timeout(10000);
+            describe('with a binary file', () => {
 
-                loadFixtureAsArrayBuffer(filename + '.mid', (err, arrayBuffer) => {
-                    expect(err).to.be.null;
+                let arrayBuffer;
+
+                beforeEach(async function () {
+                    this.timeout(6000);
+
+                    arrayBuffer = await loadFixtureAsArrayBuffer(`${ filename }.mid`);
+                });
+
+                it('should refuse to encode the file', function () {
+                    this.timeout(10000);
 
                     expect(() => {
                         midiFileEncoder.encode(arrayBuffer);
                     }).to.throw(Error, 'The given JSON object seems to be invalid.');
-
-                    done();
                 });
+
             });
 
         });

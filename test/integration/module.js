@@ -28,39 +28,52 @@ describe('module', () => {
             worker = new Worker('base/src/module.js');
         });
 
-        it('should parse the midi file', function (done) {
-            this.timeout(10000);
+        describe('with a json object', () => {
 
-            loadFixtureAsJson(filename + '.json', (err, json) => {
-                expect(err).to.be.null;
+            let arrayBuffer;
+            let json;
 
-                loadFixtureAsArrayBuffer(filename + '.mid', (rr, arrayBuffer) => {
-                    expect(rr).to.be.null;
+            beforeEach(async function () {
+                this.timeout(6000);
 
-                    worker.addEventListener('message', ({ data }) => {
-                        expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
+                arrayBuffer = await loadFixtureAsArrayBuffer(`${ filename }.mid`);
+                json = await loadFixtureAsJson(`${ filename }.json`);
+            });
 
-                        expect(data).to.deep.equal({
-                            error: null,
-                            id,
-                            result: {
-                                arrayBuffer: data.result.arrayBuffer
-                            }
-                        });
+            it('should encode the json object', function (done) {
+                this.timeout(10000);
 
-                        done();
+                worker.addEventListener('message', ({ data }) => {
+                    expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
+
+                    expect(data).to.deep.equal({
+                        error: null,
+                        id,
+                        result: {
+                            arrayBuffer: data.result.arrayBuffer
+                        }
                     });
 
-                    worker.postMessage({ id, method: 'encode', params: { midiFile: json } });
+                    done();
                 });
+
+                worker.postMessage({ id, method: 'encode', params: { midiFile: json } });
             });
+
         });
 
-        it('should refuse to encode a none json object', function (done) {
-            this.timeout(10000);
+        describe('with a binary file', () => {
 
-            loadFixtureAsArrayBuffer(filename + '.mid', (err, arrayBuffer) => {
-                expect(err).to.be.null;
+            let arrayBuffer;
+
+            beforeEach(async function () {
+                this.timeout(6000);
+
+                arrayBuffer = await loadFixtureAsArrayBuffer(`${ filename }.mid`);
+            });
+
+            it('should refuse to encode the file', function (done) {
+                this.timeout(10000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -76,6 +89,7 @@ describe('module', () => {
 
                 worker.postMessage({ id, method: 'encode', params: { midiFile: arrayBuffer } });
             });
+
         });
 
     });
