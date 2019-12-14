@@ -1,8 +1,12 @@
 import { IBrokerEvent, IEncodeResponse, IErrorResponse } from './interfaces';
 import { encode } from './midi-file-encoder';
 
-export * from './interfaces';
-export * from './types';
+/*
+ * @todo Explicitly referencing the barrel file seems to be necessary when enabling the
+ * isolatedModules compiler option.
+ */
+export * from './interfaces/index';
+export * from './types/index';
 
 addEventListener('message', ({ data }: IBrokerEvent) => {
     try {
