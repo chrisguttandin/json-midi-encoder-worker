@@ -6,7 +6,7 @@ module.exports = (config) => {
 
         basePath: '../../',
 
-        browserNoActivityTimeout: 20000,
+        browserNoActivityTimeout: 50000,
 
         client: {
             mochaWebWorker: {
@@ -29,8 +29,6 @@ module.exports = (config) => {
                 ]
             }
         },
-
-        concurrency: 2,
 
         files: [
             {
@@ -91,8 +89,6 @@ module.exports = (config) => {
 
         config.set({
 
-            browserDisconnectTimeout: 20000,
-
             browsers: [
                 'ChromeSauceLabs',
                 'FirefoxSauceLabs'
@@ -126,7 +122,9 @@ module.exports = (config) => {
                 'ChromeCanaryHeadless',
                 'FirefoxHeadless',
                 'FirefoxDeveloperHeadless'
-            ]
+            ],
+
+            concurrency: 2
 
         });
 
