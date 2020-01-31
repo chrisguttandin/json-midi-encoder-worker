@@ -1,5 +1,3 @@
-const { env } = require('process');
-
 module.exports = {
     build: [
         'clean:build',
@@ -11,13 +9,8 @@ module.exports = {
         'sh:lint-src',
         'sh:lint-test'
     ],
-    // @todo Reenable unit tests on Travis.
-    test: (env.TRAVIS)
-        ? [
-            'sh:test-integration'
-        ]
-        : [
-            'sh:test-integration',
-            'sh:test-unit'
-        ]
+    test: [
+        'sh:test-integration',
+        'sh:test-unit'
+    ]
 };
