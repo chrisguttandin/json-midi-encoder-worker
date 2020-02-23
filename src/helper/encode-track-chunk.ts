@@ -29,7 +29,7 @@ export const encode = (track: TMidiEvent[]) => {
                 throw new Error(`Unencodable message at index ${ index }.`);
             }
 
-            throw err; // tslint:disable-line:rxjs-throw-error
+            throw err;
         }
     }
 
