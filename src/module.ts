@@ -10,21 +10,27 @@ export * from './types/index';
 
 addEventListener('message', ({ data }: IBrokerEvent) => {
     try {
-       if (data.method === 'encode') {
-           const { id, params: { midiFile } } = data;
+        if (data.method === 'encode') {
+            const {
+                id,
+                params: { midiFile }
+            } = data;
 
-           const arrayBuffer = encode(midiFile);
+            const arrayBuffer = encode(midiFile);
 
-           postMessage(<IEncodeResponse> {
-               error: null,
-               id,
-               result: { arrayBuffer }
-           }, [ <ArrayBuffer> arrayBuffer ]);
-       } else {
-           throw new Error(`The given method "${ (<any> data).method }" is not supported`);
-       }
+            postMessage(
+                <IEncodeResponse>{
+                    error: null,
+                    id,
+                    result: { arrayBuffer }
+                },
+                [<ArrayBuffer>arrayBuffer]
+            );
+        } else {
+            throw new Error(`The given method "${(<any>data).method}" is not supported`);
+        }
     } catch (err) {
-        postMessage(<IErrorResponse> {
+        postMessage(<IErrorResponse>{
             error: {
                 message: err.message
             },

@@ -19,7 +19,7 @@ export const encode = ({ division, format, tracks }: IMidiFile) => {
             if (err.message.match(/Unencodable\sevent\sat\sposition\s[0-9]+\./)) {
                 const index = tracks.indexOf(track);
 
-                throw new Error(`${ err.message.slice(0, -1) } of the track at index ${ index }.`);
+                throw new Error(`${err.message.slice(0, -1)} of the track at index ${index}.`);
             }
 
             throw err;

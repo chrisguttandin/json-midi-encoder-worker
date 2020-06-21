@@ -6,7 +6,7 @@ import { joinArrayBuffers } from './join-array-buffers';
 export const encode = (track: TMidiEvent[]) => {
     const { arrayBuffer, dataView } = createArrayBufferWithDataView(8);
 
-    const arrayBuffers = [ arrayBuffer ];
+    const arrayBuffers = [arrayBuffer];
 
     let byteLength = 0;
 
@@ -26,7 +26,7 @@ export const encode = (track: TMidiEvent[]) => {
             if (err.message.match(/Unencodable\smessage\swith\sa\sdelta\sof\s[0-9]+\./)) {
                 const index = track.indexOf(message);
 
-                throw new Error(`Unencodable message at index ${ index }.`);
+                throw new Error(`Unencodable message at index ${index}.`);
             }
 
             throw err;
