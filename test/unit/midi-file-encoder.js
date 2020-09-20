@@ -31,14 +31,14 @@ describe('midiFileEncoder', () => {
                     let json;
 
                     beforeEach(async function () {
-                        this.timeout(6000);
+                        this.timeout(20000);
 
                         arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
                         json = await loadFixtureAsJson(`${filename}.json`);
                     });
 
                     it('should encode the json object', function () {
-                        this.timeout(10000);
+                        this.timeout(20000);
 
                         expect(new Uint8Array(midiFileEncoder.encode(json))).to.deep.equal(new Uint8Array(arrayBuffer));
                     });
@@ -48,13 +48,13 @@ describe('midiFileEncoder', () => {
                     let arrayBuffer;
 
                     beforeEach(async function () {
-                        this.timeout(6000);
+                        this.timeout(20000);
 
                         arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
                     });
 
                     it('should refuse to encode the file', function () {
-                        this.timeout(10000);
+                        this.timeout(20000);
 
                         expect(() => {
                             midiFileEncoder.encode(arrayBuffer);
