@@ -1,93 +1,75 @@
 import { loadFixtureAsArrayBuffer, loadFixtureAsJson } from '../helper/load-fixture';
+import { filenames } from '../helper/filenames';
 
 describe('module', () => {
-    leche.withData(
-        [
-            ['98137'],
-            ['A_F_NO7_01'],
-            ['MIDIOkFormat1-lyrics'],
-            ['MIDIOkFormat2'],
-            ['MorozovS07'],
-            ['SubTractor 1'],
-            ['SubTractor 2'],
-            ['TheEntertainer'],
-            ['because'],
-            ['californication'],
-            ['minute_waltz'],
-            ['rachmaninov3'],
-            ['scale'],
-            ['test'],
-            ['test8bars']
-        ],
-        (filename) => {
-            let id;
-            let worker;
+    for (const filename of filenames) {
+        let id;
+        let worker;
 
-            beforeEach(() => {
-                id = 89;
+        beforeEach(() => {
+            id = 89;
 
-                worker = new Worker('base/src/module.js');
+            worker = new Worker('base/src/module.js');
+        });
+
+        describe('with a json object', () => {
+            let arrayBuffer;
+            let json;
+
+            beforeEach(async function () {
+                this.timeout(20000);
+
+                arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
+                json = await loadFixtureAsJson(`${filename}.json`);
             });
 
-            describe('with a json object', () => {
-                let arrayBuffer;
-                let json;
+            it('should encode the json object', function (done) {
+                this.timeout(20000);
 
-                beforeEach(async function () {
-                    this.timeout(20000);
+                worker.addEventListener('message', ({ data }) => {
+                    expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
 
-                    arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
-                    json = await loadFixtureAsJson(`${filename}.json`);
-                });
-
-                it('should encode the json object', function (done) {
-                    this.timeout(20000);
-
-                    worker.addEventListener('message', ({ data }) => {
-                        expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
-
-                        expect(data).to.deep.equal({
-                            error: null,
-                            id,
-                            result: {
-                                arrayBuffer: data.result.arrayBuffer
-                            }
-                        });
-
-                        done();
+                    expect(data).to.deep.equal({
+                        error: null,
+                        id,
+                        result: {
+                            arrayBuffer: data.result.arrayBuffer
+                        }
                     });
 
-                    worker.postMessage({ id, method: 'encode', params: { midiFile: json } });
+                    done();
                 });
+
+                worker.postMessage({ id, method: 'encode', params: { midiFile: json } });
+            });
+        });
+
+        describe('with a binary file', () => {
+            let arrayBuffer;
+
+            beforeEach(async function () {
+                this.timeout(20000);
+
+                arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
             });
 
-            describe('with a binary file', () => {
-                let arrayBuffer;
+            it('should refuse to encode the file', function (done) {
+                this.timeout(20000);
 
-                beforeEach(async function () {
-                    this.timeout(20000);
-
-                    arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
-                });
-
-                it('should refuse to encode the file', function (done) {
-                    this.timeout(20000);
-
-                    worker.addEventListener('message', ({ data }) => {
-                        expect(data).to.deep.equal({
-                            error: {
-                                message: 'The given JSON object seems to be invalid.'
-                            },
-                            id,
-                            result: null
-                        });
-
-                        done();
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: {
+                            message: 'The given JSON object seems to be invalid.'
+                        },
+                        id,
+                        result: null
                     });
 
-                    worker.postMessage({ id, method: 'encode', params: { midiFile: arrayBuffer } });
+                    done();
                 });
+
+                worker.postMessage({ id, method: 'encode', params: { midiFile: arrayBuffer } });
             });
-        }
-    );
+        });
+    }
 });
