@@ -19,7 +19,7 @@ describe('module', () => {
             let json;
 
             beforeEach(async function () {
-                this.timeout(20000);
+                this.timeout(30000);
 
                 arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
                 json = await loadFixtureAsJson(`${filename}.json`);
