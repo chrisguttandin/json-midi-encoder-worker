@@ -6,6 +6,8 @@ describe('module', () => {
         let id;
         let worker;
 
+        afterEach(() => worker.terminate());
+
         beforeEach(() => {
             id = 89;
 
