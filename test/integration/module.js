@@ -19,14 +19,14 @@ describe('module', () => {
             let json;
 
             beforeEach(async function () {
-                this.timeout(30000);
+                this.timeout(50000);
 
                 arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
                 json = await loadFixtureAsJson(`${filename}.json`);
             });
 
             it('should encode the json object', function (done) {
-                this.timeout(20000);
+                this.timeout(50000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
@@ -50,13 +50,13 @@ describe('module', () => {
             let arrayBuffer;
 
             beforeEach(async function () {
-                this.timeout(20000);
+                this.timeout(50000);
 
                 arrayBuffer = await loadFixtureAsArrayBuffer(`${filename}.mid`);
             });
 
             it('should refuse to encode the file', function (done) {
-                this.timeout(20000);
+                this.timeout(50000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
