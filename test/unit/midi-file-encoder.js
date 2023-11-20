@@ -3,11 +3,6 @@ import { loadFixtureAsArrayBuffer, loadFixtureAsJson } from '../helper/load-fixt
 import { filenames } from '../helper/filenames';
 
 describe('midiFileEncoder', () => {
-    afterEach((done) => {
-        // @todo This is an optimistic fix to prevent the famous 'Some of your tests did a full page reload!' error.
-        setTimeout(done, 1000);
-    });
-
     describe('encode()', () => {
         for (const filename of filenames) {
             describe('with a json object', () => {
