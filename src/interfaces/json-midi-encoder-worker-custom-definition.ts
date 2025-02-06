@@ -8,7 +8,7 @@ export interface IJsonMidiEncoderWorkerCustomDefinition extends IWorkerDefinitio
         };
 
         response: {
-            result: { arrayBuffer: ArrayBuffer };
+            result: ArrayBuffer;
 
             transferables: ArrayBuffer[];
         };

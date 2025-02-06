@@ -13,6 +13,6 @@ createWorker<IJsonMidiEncoderWorkerCustomDefinition>(self, <TWorkerImplementatio
     encode: ({ midiFile }) => {
         const arrayBuffer = encode(midiFile);
 
-        return { result: { arrayBuffer }, transferables: [arrayBuffer] };
+        return { result: arrayBuffer, transferables: [arrayBuffer] };
     }
 });

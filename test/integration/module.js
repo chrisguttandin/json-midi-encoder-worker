@@ -29,13 +29,11 @@ describe('module', () => {
                 this.timeout(50000);
 
                 worker.addEventListener('message', ({ data }) => {
-                    expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
+                    expect(new Uint8Array(data.result)).to.deep.equal(new Uint8Array(arrayBuffer));
 
                     expect(data).to.deep.equal({
                         id,
-                        result: {
-                            arrayBuffer: data.result.arrayBuffer
-                        }
+                        result: data.result
                     });
 
                     done();
