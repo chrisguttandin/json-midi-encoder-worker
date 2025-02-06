@@ -32,7 +32,6 @@ describe('module', () => {
                     expect(new Uint8Array(data.result.arrayBuffer)).to.deep.equal(new Uint8Array(arrayBuffer));
 
                     expect(data).to.deep.equal({
-                        error: null,
                         id,
                         result: {
                             arrayBuffer: data.result.arrayBuffer
@@ -61,10 +60,10 @@ describe('module', () => {
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
                         error: {
+                            code: -32603,
                             message: 'The given JSON object seems to be invalid.'
                         },
-                        id,
-                        result: null
+                        id
                     });
 
                     done();

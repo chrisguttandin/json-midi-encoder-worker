@@ -1,4 +1,5 @@
-import { IBrokerEvent, IEncodeResponse, IErrorResponse } from './interfaces';
+import { TWorkerImplementation, createWorker } from 'worker-factory';
+import { IJsonMidiEncoderWorkerCustomDefinition } from './interfaces';
 import { encode } from './midi-file-encoder';
 
 /*
@@ -8,34 +9,10 @@ import { encode } from './midi-file-encoder';
 export * from './interfaces/index';
 export * from './types/index';
 
-addEventListener('message', ({ data }: IBrokerEvent) => {
-    try {
-        if (data.method === 'encode') {
-            const {
-                id,
-                params: { midiFile }
-            } = data;
+createWorker<IJsonMidiEncoderWorkerCustomDefinition>(self, <TWorkerImplementation<IJsonMidiEncoderWorkerCustomDefinition>>{
+    encode: ({ midiFile }) => {
+        const arrayBuffer = encode(midiFile);
 
-            const arrayBuffer = encode(midiFile);
-
-            postMessage(
-                <IEncodeResponse>{
-                    error: null,
-                    id,
-                    result: { arrayBuffer }
-                },
-                [<ArrayBuffer>arrayBuffer]
-            );
-        } else {
-            throw new Error(`The given method "${(<any>data).method}" is not supported`);
-        }
-    } catch (err) {
-        postMessage(<IErrorResponse>{
-            error: {
-                message: err.message
-            },
-            id: data.id,
-            result: null
-        });
+        return { result: { arrayBuffer }, transferables: [arrayBuffer] };
     }
 });

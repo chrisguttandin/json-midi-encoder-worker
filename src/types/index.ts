@@ -1,1 +1,1 @@
-export * from './worker-message';
+export * from './json-midi-encoder-worker-definition';
