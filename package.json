@@ -13,7 +13,7 @@
         "json-midi-message-encoder": "^4.1.67",
         "midi-json-parser-worker": "^8.1.67",
         "tslib": "^2.9.1",
-        "worker-factory": "^7.0.50"
+        "worker-factory": "^7.0.51"
     },
     "description": "The worker which is used by the json-midi-encoder package.",
     "devDependencies": {
